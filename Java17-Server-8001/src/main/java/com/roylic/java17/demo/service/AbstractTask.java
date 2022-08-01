@@ -16,7 +16,7 @@ public abstract class AbstractTask {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         System.out.println("Task 1 Start");
-        TimeUnit.SECONDS.sleep(random.nextInt(3));
+        TimeUnit.SECONDS.sleep(random.nextInt(5));
         stopWatch.stop();
         System.out.println("Task 1 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
     }
@@ -35,7 +35,7 @@ public abstract class AbstractTask {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         System.out.println("Task 3 Start");
-        TimeUnit.SECONDS.sleep(random.nextInt(10));
+        TimeUnit.SECONDS.sleep(random.nextInt(5));
         System.out.println("Task 3 Finished");
         stopWatch.stop();
         System.out.println("Task 3 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
