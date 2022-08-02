@@ -13,8 +13,8 @@ public class AsyncConfiguration {
 
     @Bean("controllerExecutor")
     public Executor controllerExecutor() {
-        return new ThreadPoolExecutor(2,
-                2,
+        return new ThreadPoolExecutor(1,
+                1,
                 10,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingDeque(),
