@@ -27,13 +27,14 @@ public class ExtraController {
 
     @PostMapping("/test")
     public String syncCallingTest() throws Exception {
-
-        CompletableFuture<String> future_1 = asyncCallbackTask.doTaskOneCallback();
-        CompletableFuture<String> future_2 = asyncCallbackTask.doTaskTwoCallback();
-
-        CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(future_1, future_2);
-        voidCompletableFuture.join();
-        return "finished";
+        int sum = 0;
+        for (int i = 0; i < 500; i++) {
+            sum += i;
+        }
+        for (int i = 0; i < 500; i++) {
+            sum += i;
+        }
+        return String.valueOf(sum);
     }
 
 
