@@ -1,5 +1,6 @@
 package com.roylic.java17.demo.config;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -13,11 +14,12 @@ public class AsyncConfiguration {
 
     @Bean("controllerExecutor")
     public Executor controllerExecutor() {
-        return new ThreadPoolExecutor(1,
-                1,
-                10,
-                TimeUnit.MILLISECONDS,
-                new LinkedBlockingDeque(),
+        return new ThreadPoolExecutor(3,
+                5,
+                2,
+                TimeUnit.SECONDS,
+                new LinkedBlockingDeque(100),
+                new ThreadFactoryBuilder().setNameFormat("contr-th-%d").setDaemon(true).build(),
                 new ThreadPoolExecutor.AbortPolicy());
     }
 
