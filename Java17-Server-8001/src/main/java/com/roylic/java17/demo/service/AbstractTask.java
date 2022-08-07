@@ -15,30 +15,30 @@ public abstract class AbstractTask {
     public void doTaskOne() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        System.out.println("Task 1 Start");
-        TimeUnit.SECONDS.sleep(random.nextInt(5));
+//        System.out.println("Task 1 Start");
+        TimeUnit.SECONDS.sleep(random.nextInt(2));
         stopWatch.stop();
-        System.out.println("Task 1 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
+//        System.out.println("Task 1 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
     }
 
     public void doTaskTwo() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        System.out.println("Task 2 Start");
-        TimeUnit.SECONDS.sleep(random.nextInt(5));
-        System.out.println("Task 2 Finished");
+//        System.out.println("Task 2 Start");
+        TimeUnit.SECONDS.sleep(random.nextInt(2));
+//        System.out.println("Task 2 Finished");
         stopWatch.stop();
-        System.out.println("Task 2 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
+//        System.out.println("Task 2 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
     }
 
     public void doTaskThree() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        System.out.println("Task 3 Start");
-        TimeUnit.SECONDS.sleep(random.nextInt(5));
-        System.out.println("Task 3 Finished");
+//        System.out.println("Task 3 Start");
+        TimeUnit.SECONDS.sleep(random.nextInt(3));
+//        System.out.println("Task 3 Finished");
         stopWatch.stop();
-        System.out.println("Task 3 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
+//        System.out.println("Task 3 Finished, with time consuming: " + stopWatch.getTotalTimeMillis() + "ms");
     }
 
 }

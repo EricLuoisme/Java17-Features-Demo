@@ -18,8 +18,9 @@ public class AsyncConfiguration {
                 5,
                 10,
                 TimeUnit.SECONDS,
-                new LinkedBlockingDeque(100),
+                new LinkedBlockingDeque(30),
 //                new ThreadFactoryBuilder().setNameFormat("contr-th-%d").setDaemon(true).build(),
+                new ThreadFactoryBuilder().setNameFormat("contr-th-%d").build(),
                 new ThreadPoolExecutor.AbortPolicy());
     }
 
@@ -27,16 +28,19 @@ public class AsyncConfiguration {
      * For Async Handling, if we just shut-down, it might cause database problem
      * (if the db not stored the stuff correctly)
      */
-//    @Bean("controllerScheduleExecutor")
-//    public Executor controllerScheduleExecutor() {
-//        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-//        threadPoolTaskExecutor.setCorePoolSize(2);
-//        threadPoolTaskExecutor.setMaxPoolSize(3);
-//        threadPoolTaskExecutor.setQueueCapacity(10);
-//        threadPoolTaskExecutor.setThreadNamePrefix("contr-sche-");
-//        threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
-//        threadPoolTaskExecutor.setAwaitTerminationSeconds(10);
-//        return threadPoolTaskExecutor;
-//    }
+    @Bean("controllerScheduleExecutor")
+    public Executor controllerScheduleExecutor() {
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setCorePoolSize(2);
+        threadPoolTaskExecutor.setMaxPoolSize(5);
+        threadPoolTaskExecutor.setKeepAliveSeconds(10);
+        threadPoolTaskExecutor.setQueueCapacity(30);
+        threadPoolTaskExecutor.setThreadNamePrefix("contr-tak-");
+        // default one
+        threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
+        threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
+        threadPoolTaskExecutor.setAwaitTerminationSeconds(3);
+        return threadPoolTaskExecutor;
+    }
 
 }

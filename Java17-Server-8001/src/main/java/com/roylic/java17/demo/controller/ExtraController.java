@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.service.annotation.PostExchange;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for testing @HttpExchange
@@ -27,14 +28,8 @@ public class ExtraController {
 
     @PostMapping("/test")
     public String syncCallingTest() throws Exception {
-        int sum = 0;
-        for (int i = 0; i < 500; i++) {
-            sum += i;
-        }
-        for (int i = 0; i < 500; i++) {
-            sum += i;
-        }
-        return String.valueOf(sum);
+        TimeUnit.SECONDS.sleep(3);
+        return "finished";
     }
 
 
