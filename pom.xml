@@ -29,6 +29,7 @@
     <modules>
         <module>Java17-Server-8001</module>
         <module>Imp-Stuff-Remaining</module>
+        <module>Java21-Features-Demo</module>
     </modules>
 
     <!--打包方式-->
