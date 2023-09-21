@@ -1,6 +1,6 @@
-package loom;
+package virtualThread;
 
-public class LoomTest {
+public class VirtualThreadBasicTest {
 
     // need to add '--enable-preview' as additional command line in compiler -> then    enable the JDK21 features
     // or set -> 21 in Target bytecode version setting in compiler
