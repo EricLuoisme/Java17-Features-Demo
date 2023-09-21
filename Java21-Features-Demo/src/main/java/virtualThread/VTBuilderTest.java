@@ -1,6 +1,6 @@
 package virtualThread;
 
-public class VirtualThreadBuilderTest {
+public class VTBuilderTest {
 
     public static void main(String[] args) throws InterruptedException {
 
