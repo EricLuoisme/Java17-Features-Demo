@@ -18,7 +18,6 @@ public class EchoServer {
                 ServerSocket serverSocket = new ServerSocket(portNum);
                 ExecutorService ownExecutor = Executors.newVirtualThreadPerTaskExecutor()
         ) {
-
             while (true) {
                 // accept incoming connections
                 Socket clientSocket = serverSocket.accept();
