@@ -1,6 +1,7 @@
 package concurrency;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.StructuredTaskScope;
@@ -50,6 +51,45 @@ public class GetFastestDeliverTimeScope extends StructuredTaskScope<Integer> {
     }
 
     public static void main(String[] args) {
+
+        // single product -> find the fastest one
+        singleDeliverProduct();
+
+        // multi products -> find the fastest one for each of them
+        System.out.println(multiDeliverProducts(Arrays.asList(1, 2, 2, 5)));
+    }
+
+
+    private static List<Integer> multiDeliverProducts(List<Integer> productIds) {
+        try (
+                var scope = new StructuredTaskScope<Integer>()
+        ) {
+
+            List<Subtask<Integer>> subtasks = productIds.stream()
+                    .map(id -> scope.fork(
+                            () -> {
+                                System.out.println("Haha");
+                                return id + 100;
+                            }))
+                    .toList();
+
+            scope.join();
+
+            // for the result, only return successfully finished subtask's result
+            return subtasks.stream()
+                    .filter(subtask -> subtask.state() == Subtask.State.SUCCESS)
+                    .map(Subtask::get)
+                    .toList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Collections.emptyList();
+    }
+
+
+    private static void singleDeliverProduct() {
         try (
                 // by using custom scope
                 var customScope = new GetFastestDeliverTimeScope()
@@ -77,5 +117,4 @@ public class GetFastestDeliverTimeScope extends StructuredTaskScope<Integer> {
             e.printStackTrace();
         }
     }
-
 }
