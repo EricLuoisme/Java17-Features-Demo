@@ -62,7 +62,7 @@ public class StructuredConcurrency {
 
             // join all subtasks
             scope.join();
-            scope.throwIfFailed(e -> new RuntimeException("Exception")); // handle error when subtask fails
+            scope.throwIfFailed(_ -> new RuntimeException("Exception")); // handle error when subtask fails
 
             // return
             Integer accountDetail = accountDetailFuture.get();
