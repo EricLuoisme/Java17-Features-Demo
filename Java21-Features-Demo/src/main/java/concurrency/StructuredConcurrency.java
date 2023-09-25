@@ -15,13 +15,18 @@ public class StructuredConcurrency {
     public static void main(String[] args) {
 
         // when we need multiple time-consuming task's result and combine them together to form the response
+        System.out.println("Try ShutdownOnFailure");
         taskScope_combineResults();
 
         // when we only need one of the result could form the response
-        taskScope_singleResults();
+        System.out.println("Try ShutdownOnSuccess");
+        Object o = taskScope_singleResults();
+        if (null != o) {
+            System.out.println(o);
+        }
     }
 
-    private static void taskScope_singleResults() {
+    private static Object taskScope_singleResults() {
         try (
                 // the virtualThreadPool will be shut down when it met one of them success
                 var scope = new StructuredTaskScope.ShutdownOnSuccess<>()
@@ -32,13 +37,15 @@ public class StructuredConcurrency {
             }
 
             // return
-            Object result = scope.result();
-            System.out.println(result);
-
-        } catch (ExecutionException e) {
+            System.out.println("Finished");
+            return scope.join().result();
+        } catch (InterruptedException e) {
             // populate the interruption
             Thread.currentThread().interrupt();
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
         }
+        return null;
     }
 
 
