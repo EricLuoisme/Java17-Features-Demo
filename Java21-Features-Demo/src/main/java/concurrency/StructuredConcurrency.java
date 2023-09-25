@@ -1,5 +1,6 @@
 package concurrency;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.StructuredTaskScope;
 import java.util.function.Supplier;
 
@@ -17,6 +18,27 @@ public class StructuredConcurrency {
         taskScope_combineResults();
 
         // when we only need one of the result could form the response
+        taskScope_singleResults();
+    }
+
+    private static void taskScope_singleResults() {
+        try (
+                // the virtualThreadPool will be shut down when it met one of them success
+                var scope = new StructuredTaskScope.ShutdownOnSuccess<>()
+        ) {
+            // split the task -> by using scope.fork()
+            for (int i = 0; i < 3; i++) {
+                scope.fork(() -> getAccountDetails(10086));
+            }
+
+            // return
+            Object result = scope.result();
+            System.out.println(result);
+
+        } catch (ExecutionException e) {
+            // populate the interruption
+            Thread.currentThread().interrupt();
+        }
     }
 
 
