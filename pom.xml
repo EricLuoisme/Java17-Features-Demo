@@ -17,6 +17,7 @@
     <modules>
         <module>Java17-Server-8001</module>
         <module>Imp-Stuff-Remaining</module>
+        <module>Minum-Server-Demo</module>
     </modules>
 
     <!--打包方式-->
