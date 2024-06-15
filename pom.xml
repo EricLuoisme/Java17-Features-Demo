@@ -18,6 +18,7 @@
         <module>Java17-Server-8001</module>
         <module>Imp-Stuff-Remaining</module>
         <module>Minum-Server-Demo</module>
+        <module>SpringBoot3-Kafka-Logging</module>
     </modules>
 
     <!--打包方式-->
@@ -31,6 +32,7 @@
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.32</lombok.version>
         <guava.version>33.2.1-jre</guava.version>
+        <kafka.version>3.2.0</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -44,12 +46,17 @@
                 <scope>import</scope>
             </dependency>
 
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring.boot.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${kafka.version}</version>
             </dependency>
 
             <dependency>
