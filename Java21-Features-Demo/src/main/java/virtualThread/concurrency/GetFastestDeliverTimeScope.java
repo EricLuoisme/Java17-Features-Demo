@@ -1,4 +1,4 @@
-package concurrency;
+package virtualThread.concurrency;
 
 import java.util.ArrayList;
 import java.util.Arrays;
